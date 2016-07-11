@@ -1,5 +1,0 @@
-- John: Introduction, data description
-- Brian: Kalman Filtering
-- Joe: Physical Modeling
-- Other sections: Description, Results and metrics (pre, post), Conclusion
-
