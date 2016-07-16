@@ -1,9 +1,9 @@
-function [addDataOut] = addData(inData, sizeRowrawData, sizeColrawDataTrain, aggData, totID)
+function [addDataOut] = addData(inData, sizeRowrawData, sizeColrawDataIn, aggData, totID)
 % Fill Data: Returns Table of added Data:
 % INPUT:
 % - inData: input Data set
 % - sizeRowrawData = number of rows for inData.
-% - sizeColrawDataTrain = number of columns for inData.
+% - sizeColrawDataIn = number of columns for inData.
 % - aggData: Aggregate Data for input Data set
 % - totID = number of rows for aggData, which is the total number of unique ID's.
 % FUNCTIONS:
@@ -44,21 +44,21 @@ function [addDataOut] = addData(inData, sizeRowrawData, sizeColrawDataTrain, agg
         end
         
         numID(i) = [currnumID];
-        TimeSecFromBegin(i) = [(inData{i,'GentimeSec'} - minGentimeSec)];
+        TimeSecFromBegin(i) = [(inData{i,'smoothGentimeSec'} - minGentimeSec)];
         % Need to convert from angles of Longitude & Latitude to length for
         % (x,y)
-        xLongFromBegin(i) = LatLon2Dist(xLongBeg, yLatBeg, inData{i,'Longitude'}, yLatBeg);
-        yLatFromBegin(i) = LatLon2Dist(xLongBeg, yLatBeg, xLongBeg, inData{i,'Latitude'});
-        zElevFromBegin(i) = [(inData{i,'Elevation'} - zElevBeg)];
+        xLongFromBegin(i) = LatLon2Dist(xLongBeg, yLatBeg, inData{i,'smoothLongitude'}, yLatBeg);
+        yLatFromBegin(i) = LatLon2Dist(xLongBeg, yLatBeg, xLongBeg, inData{i,'smoothLatitude'});
+        zElevFromBegin(i) = [(inData{i,'smoothElevation'} - zElevBeg)];
 
     end % end for loop
 
     % Final Output: Remove ID and replaced with number ID
-%    addDataOut = [array2table(TimeSecFromBegin) inData(:,1:(sizeColrawDataTrain-1))];
+%    addDataOut = [array2table(TimeSecFromBegin) inData(:,1:(sizeColrawDataIn-1))];
     % Output Table:
-    addDataOut = [array2table(numID) array2table(TimeSecFromBegin) array2table(xLongFromBegin) array2table(yLatFromBegin) array2table(zElevFromBegin) inData(:,1:(sizeColrawDataTrain-1))];
+    addDataOut = [array2table(numID) array2table(TimeSecFromBegin) array2table(xLongFromBegin) array2table(yLatFromBegin) array2table(zElevFromBegin) inData(:,1:(sizeColrawDataIn-1))];
     % Output Matrix:
-%    addDataOut = [numID TimeSecFromBegin inData{:,1:(sizeColrawDataTrain-1)}];
+%    addDataOut = [numID TimeSecFromBegin inData{:,1:(sizeColrawDataIn-1)}];
        
     
 end % end function

@@ -1,5 +1,13 @@
 - John: Introduction, data description
+
+
 - Brian: Kalman Filtering
+	-- Kalman filtering with multivariate vs. single(?) variable smoothing comparision (both with raw data, and Joe Choi's v1b data on acceleration, velocity, and yaw rate)
+	
+	
 - Joe: Physical Modeling
+	-- Include examples of wrong data sets- acceleration and velocity plots in Up-Stat presentation, new smoothing data set for yaw rate from Brian R.
+	
+	
 - Other sections: Description, Results and metrics (pre, post), Conclusion
 

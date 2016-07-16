@@ -13,8 +13,8 @@ function [aggData totID] = aggregateData(rawData, sizeRowrawData)
     aggData = cell(1, length(aggDataVars));
     totID = 1;
     currID = rawData{1,'ID'};
-    minGentimeSec = rawData{1,'GentimeSec'};
-    maxGentimeSec = rawData{1,'GentimeSec'};
+    minGentimeSec = rawData{1,'smoothGentimeSec'};
+    maxGentimeSec = rawData{1,'smoothGentimeSec'};
     % row number of rawData when GentimeSec==minGentimeSec:
     rowNumrawData4minGentimeSec(totID) = 1;
         
@@ -30,13 +30,13 @@ function [aggData totID] = aggregateData(rawData, sizeRowrawData)
         % First check if new ID
         if ( strcmp(currID, rawData{i,'ID'}) )   % If same ID
             % Find minimum time for given ID
-            if ( rawData{i,'GentimeSec'} < minGentimeSec )
-                minGentimeSec = rawData{i,'GentimeSec'};
+            if ( rawData{i,'smoothGentimeSec'} < minGentimeSec )
+                minGentimeSec = rawData{i,'smoothGentimeSec'};
                 rowNumrawData4minGentimeSec(totID) = i;
             end
             % Find maximum time for given ID
-            if ( rawData{i,'GentimeSec'} > maxGentimeSec )
-                maxGentimeSec = rawData{i,'GentimeSec'};
+            if ( rawData{i,'smoothGentimeSec'} > maxGentimeSec )
+                maxGentimeSec = rawData{i,'smoothGentimeSec'};
             end
         else   % If Different ID        
             % Insert data for previous ID first
@@ -45,9 +45,9 @@ function [aggData totID] = aggregateData(rawData, sizeRowrawData)
             totID = totID + 1;
             % Reset parameters
             currID = rawData{i,'ID'};
-            minGentimeSec = rawData{i,'GentimeSec'};
+            minGentimeSec = rawData{i,'smoothGentimeSec'};
             rowNumrawData4minGentimeSec(totID) = i;
-            maxGentimeSec = rawData{i,'GentimeSec'};
+            maxGentimeSec = rawData{i,'smoothGentimeSec'};
         end
 
     end % end for loop
@@ -64,9 +64,9 @@ function [aggData totID] = aggregateData(rawData, sizeRowrawData)
     yLatBeg = NaN(totID,1);
     zElevBeg = NaN(totID,1);
     for (i=1:totID)
-        xLongBeg(i) = rawData{rowNumrawData4minGentimeSec(i),'Longitude'};
-        yLatBeg(i) = rawData{rowNumrawData4minGentimeSec(i),'Latitude'};
-        zElevBeg(i) = rawData{rowNumrawData4minGentimeSec(i),'Elevation'};
+        xLongBeg(i) = rawData{rowNumrawData4minGentimeSec(i),'smoothLongitude'};
+        yLatBeg(i) = rawData{rowNumrawData4minGentimeSec(i),'smoothLatitude'};
+        zElevBeg(i) = rawData{rowNumrawData4minGentimeSec(i),'smoothElevation'};
     end
 %     size(xLongBeg)
 %     size(yLatBeg)
