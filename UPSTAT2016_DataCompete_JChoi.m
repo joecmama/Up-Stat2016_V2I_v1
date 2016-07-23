@@ -10,10 +10,10 @@ close all
 clc
 
 % 1.0. Import Data smoothed by Kalman Filter (Brian Roach's R code)
-filenameImport = 'DataContestCombined_xyzHYr_comibined_v1a.csv'
+filenameImport = 'test1\numID1DataContestCombined_original_xyz_lowess_v1a.csv'
 delimiterIn = ',';
 headerlinesIn = 1;
-rawDataIn = readtable(filenameImport);
+rawDataIn = readtable(filenameImport, 'Delimiter', delimiterIn, 'ReadVariableNames', headerlinesIn);
 rawDataIn(1,:)
 
 % 1.1. Initialize Variables
