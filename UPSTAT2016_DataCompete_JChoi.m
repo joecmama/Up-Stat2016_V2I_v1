@@ -10,10 +10,23 @@ close all
 clc
 
 % 1.0. Import Data smoothed by Kalman Filter (Brian Roach's R code)
-filenameImport = 'test1\numID1DataContestCombined_original_xyz_lowess_v1a.csv'
+% 1.1. Initialize
+filenameImport_part1 = 'numID_xyz_lowess_v1a\numID';
+filenameImport_part3 = '_xyz_lowess_v1a.csv';
 delimiterIn = ',';
 headerlinesIn = 1;
+totIDIn = 75;
+% 1.2. Initially set up Table
+filenameImport_part2 = int2str(1);
+filenameImport = strcat(filenameImport_part1,filenameImport_part2,filenameImport_part3);
 rawDataIn = readtable(filenameImport, 'Delimiter', delimiterIn, 'ReadVariableNames', headerlinesIn);
+% 1.3. Read in rest of data.
+for i=2:totIDIn
+    filenameImport_part2 = int2str(i);
+    filenameImport = strcat(filenameImport_part1,filenameImport_part2,filenameImport_part3);
+    rawDataIn_tmp = readtable(filenameImport, 'Delimiter', delimiterIn, 'ReadVariableNames', headerlinesIn);
+    rawDataIn = [rawDataIn; rawDataIn_tmp];
+end
 rawDataIn(1,:)
 
 % 1.1. Initialize Variables

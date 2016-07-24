@@ -32,7 +32,7 @@ function plotIDxVxAxHeadYawTheory(inData, mynumID)
     AzTheory = inData{inData.numID==mynumID,'AzTheory'};
     SpeedxyTheory = inData{inData.numID==mynumID,'SpeedxyTheory'};
     SpeedTotTheory = inData{inData.numID==mynumID,'SpeedTotTheory'};
-    YawrateTheory = inData{inData.numID==mynumID,'YawrateTheory'};
+%    YawrateTheory = inData{inData.numID==mynumID,'YawrateTheory'};
 
  
     % 4.0. Plots
@@ -122,18 +122,18 @@ function plotIDxVxAxHeadYawTheory(inData, mynumID)
 %     scatter(TimeArray, inIDData{:,'Speed'}, myMarkerType, dataColorType); % From Data
     xlabel('time(s)'); ylabel('Speed-total(m/s)');
 
-    % 4.7. Plot Heading
-    subplot(subplotrows,subplotcols,14);
-    scatter(TimeArray, inIDData{:,'smoothHeading'}, myMarkerType, dataColorType); % From Data
-    xlabel('time(s)'); ylabel('Heading(deg)');
-
-    % 4.8. Plot Yawrate
-    subplot(subplotrows,subplotcols,15);
-    scatter(TimeArray, YawrateTheory, myMarkerType);
-    hold on;
-%    scatter(TimeArray, inIDData{:,'YawRate'}, myMarkerType, dataColorType); % From Data
-    scatter(TimeArray, inIDData{:,'smoothYawrate'}, myMarkerType, dataColorType); % From Data
-    xlabel('time(s)'); ylabel('YawRate(deg/s)');
+%     % 4.7. Plot Heading
+%     subplot(subplotrows,subplotcols,14);
+%     scatter(TimeArray, inIDData{:,'smoothHeading'}, myMarkerType, dataColorType); % From Data
+%     xlabel('time(s)'); ylabel('Heading(deg)');
+% 
+%     % 4.8. Plot Yawrate
+%     subplot(subplotrows,subplotcols,15);
+%     scatter(TimeArray, YawrateTheory, myMarkerType);
+%     hold on;
+% %    scatter(TimeArray, inIDData{:,'YawRate'}, myMarkerType, dataColorType); % From Data
+%     scatter(TimeArray, inIDData{:,'smoothYawrate'}, myMarkerType, dataColorType); % From Data
+%     xlabel('time(s)'); ylabel('YawRate(deg/s)');
 
     % Close All Figures
 %   close all;
