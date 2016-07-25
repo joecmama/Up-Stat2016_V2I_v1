@@ -49,7 +49,7 @@ function [addDataOut] = addVelAccYawTheoryData_Step_v1b(inData, aggData)
             [VyTheoryID, AyTheoryID] = VxAxTheory(TimeArray, inIDData{:,'yLatFromBegin'});
             [VzTheoryID, AzTheoryID] = VxAxTheory(TimeArray, inIDData{:,'zElevFromBegin'});
             % 2.2.2. Obtain Theoretical Yawrate:
-%            [YawrateTheoryID] = YawrateTheoryCalc(TimeArray, inIDData{:,'smoothHeading'});
+            [YawrateTheoryID] = YawrateTheoryCalc(TimeArray, inIDData{:,'smoothHeading'});
 
             % 2.3.0. Calculate Derived Values
             % 2.3.1. Calculate Speed.
@@ -65,7 +65,7 @@ function [addDataOut] = addVelAccYawTheoryData_Step_v1b(inData, aggData)
             AzTheory = [AzTheory; AzTheoryID];
             SpeedxyTheory = [SpeedxyTheory; SpeedxyID];
             SpeedTotTheory = [SpeedTotTheory; SpeedTotID];
-%            YawrateTheory = [YawrateTheory; YawrateTheoryID];
+            YawrateTheory = [YawrateTheory; YawrateTheoryID];
             
     end % end for loop
 
@@ -79,13 +79,12 @@ function [addDataOut] = addVelAccYawTheoryData_Step_v1b(inData, aggData)
     size(AzTheory)
     size(SpeedxyTheory)
     size(SpeedTotTheory)
-%    size(YawrateTheory)
+    size(YawrateTheory)
             
     % Final Output: Remove ID and replaced with number ID
 %    addDataOut = [array2table(TimeSecFromBegin) inData(:,1:(sizeColrawDataIn-1))];
     % Output Table:
-%    addDataOut = [ inData array2table(VxTheory) array2table(VyTheory) array2table(VzTheory) array2table(AxTheory) array2table(AyTheory) array2table(AzTheory) array2table(SpeedxyTheory) array2table(SpeedTotTheory) array2table(YawrateTheory) ];
-    addDataOut = [ inData array2table(VxTheory) array2table(VyTheory) array2table(VzTheory) array2table(AxTheory) array2table(AyTheory) array2table(AzTheory) array2table(SpeedxyTheory) array2table(SpeedTotTheory) ];
+    addDataOut = [ inData array2table(VxTheory) array2table(VyTheory) array2table(VzTheory) array2table(AxTheory) array2table(AyTheory) array2table(AzTheory) array2table(SpeedxyTheory) array2table(SpeedTotTheory) array2table(YawrateTheory) ];
     % Output Matrix:
 %    addDataOut = [numID TimeSecFromBegin inData{:,1:(sizeColrawDataIn-1)}];
        

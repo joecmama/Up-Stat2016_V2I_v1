@@ -30,7 +30,8 @@ function [YawrateTheory] = YawrateTheoryCalc(TimeArray, heading)
         if (DeltaTime ==0)
             YawrateTheory(i,1) = 0;
         else
-            YawrateTheory(i,1) = (heading(i+1,1) - heading(i,1))/DeltaTime;        
+            DeltaHeading = correctHeadingDiff(heading(i+1,1), heading(i,1)); % Take care of mod 360 deg.
+            YawrateTheory(i,1) = DeltaHeading/DeltaTime;        
         end
     end
     % Just assume Last value for Yawrate is same as the one before:

@@ -14,22 +14,23 @@ clc
 
 % 1.0. Import Data smoothed by Kalman Filter (Brian Roach's R code)
 % 1.1. Initialize
-filenameImport_part1 = 'numID_xyz_lowess_v1a\numID';
-filenameImport_part3 = '_xyz_lowess_v1a.csv';
+filenameImport_part1 = 'Combined_xyzH_lowess\';
+filenameImport_part3 = 'Combined_xyzH_lowess_v1a_clean.csv';
 delimiterIn = ',';
 headerlinesIn = 1;
-totIDIn_initial = 75;
+%totIDIn_initial = 75;
 % 1.2. Initially set up Table
-filenameImport_part2 = int2str(1);
+%filenameImport_part2 = int2str(1);
+filenameImport_part2 = '';
 filenameImport = strcat(filenameImport_part1,filenameImport_part2,filenameImport_part3);
 rawDataIn = readtable(filenameImport, 'Delimiter', delimiterIn, 'ReadVariableNames', headerlinesIn);
-% 1.3. Read in rest of data.
-for i=2:totIDIn_initial
-    filenameImport_part2 = int2str(i);
-    filenameImport = strcat(filenameImport_part1,filenameImport_part2,filenameImport_part3);
-    rawDataIn_tmp = readtable(filenameImport, 'Delimiter', delimiterIn, 'ReadVariableNames', headerlinesIn);
-    rawDataIn = [rawDataIn; rawDataIn_tmp];
-end
+% % 1.3. Read in rest of data.
+% for i=2:totIDIn_initial
+%     filenameImport_part2 = int2str(i);
+%     filenameImport = strcat(filenameImport_part1,filenameImport_part2,filenameImport_part3);
+%     rawDataIn_tmp = readtable(filenameImport, 'Delimiter', delimiterIn, 'ReadVariableNames', headerlinesIn);
+%     rawDataIn = [rawDataIn; rawDataIn_tmp];
+% end
 rawDataIn(1,:)
 
 % 1.1. Initialize Variables
@@ -39,13 +40,14 @@ sizeColrawDataIn = sizerawDataIn(2);
 % 1.2. Fixed Parameters
 dataFreq = 10; % Units = Hz  (Manually input, using ideal device rate)
 TimeSecSeparation = 1/dataFreq; % Separation between data points in Sec.
+SpanNumPoints = 30; % Number of Data Points (in time) to Span for Smoothing in Lowess/Loess.
 
 % 2.0. Aggregate Data Initially
 [aggDataIn totIDIn] = aggregateData(rawDataIn, sizeRowrawDataIn);
 totIDIn
-if (totIDIn_initial ~= totIDIn)
-    disp('ERROR: totIDIn_initial != totIDIn');
-end;
+% if (totIDIn_initial ~= totIDIn)
+%     disp('ERROR: totIDIn_initial != totIDIn');
+% end;
 
 
 % 3.0. Add Data
