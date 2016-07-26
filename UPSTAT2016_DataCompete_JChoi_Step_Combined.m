@@ -45,7 +45,7 @@ sizeColrawDataIn = sizerawDataIn(2);
 % 1.2. Fixed Parameters
 dataFreq = 10; % Units = Hz  (Manually input, using ideal device rate)
 TimeSecSeparation = 1/dataFreq; % Separation between data points in Sec.
-SpanNumPoints = 30; % Number of Data Points (in time) to Span for Smoothing in Lowess/Loess.
+SpanNumPoints = 20; % Number of Data Points (in time) to Span for Smoothing in Lowess/Loess.
 
 % 2.0. Aggregate Data Initially
 [aggDataIn totIDIn] = aggregateData(rawDataIn, sizeRowrawDataIn);
@@ -131,4 +131,4 @@ for i=1:totIDIn
 end
 
 % 10. Output v2a stage:
-writetable(smoothVel_v2a_Out,'finalOutputData_v2a.txt','Delimiter','\t');
+writetable(smoothVel_v2a_Out,'finalOutputData_v2a_rloess-span20.txt','Delimiter','\t');
